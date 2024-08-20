@@ -1,6 +1,6 @@
 class Celda:
     __item:int
-    __sig:int
+    __sig:int 
     def __init__(self, item=None, sig=None):
         # Constructor de la clase Celda
         self.__item = item  # Almacena el valor del elemento en la celda
