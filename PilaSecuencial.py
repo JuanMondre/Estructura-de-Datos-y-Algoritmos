@@ -6,11 +6,11 @@ class PilaSecuencial:
     __cant: int  # Capacidad máxima de la pila
     __tope: int  # Índice del tope de la pila
     
-    def __init__(self, __cant=0):
+    def __init__(self, cant=0):
         # Método constructor, se ejecuta al crear una instancia de la clase
-        self.__cant = __cant  # Inicializa la capacidad máxima de la pila
+        self.__cant = cant  # Inicializa la capacidad máxima de la pila
         self.__tope = -1  # Inicializa el tope en -1, indicando que la pila está vacía
-        self.__items = np.zeros(__cant, dtype=int)  # Crea un array de ceros con capacidad 'cant' usando numpy
+        self.__items = np.zeros(cant, dtype=int)  # Crea un array de ceros con capacidad 'cant' usando numpy
     
     def vacia(self):
         # Método para verificar si la pila está vacía

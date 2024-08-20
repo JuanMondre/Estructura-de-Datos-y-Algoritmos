@@ -1,9 +1,10 @@
 class Celda:
     __item:int
-    def __init__(self, __item=None, __sig=None):
+    __sig:int
+    def __init__(self, item=None, sig=None):
         # Constructor de la clase Celda
-        self.__item = __item  # Almacena el valor del elemento en la celda
-        self.__sig = __sig  # Almacena la referencia a la siguiente celda en la pila
+        self.__item = item  # Almacena el valor del elemento en la celda
+        self.__sig = sig  # Almacena la referencia a la siguiente celda en la pila
     
     def obtener_item(self):
         # Método para obtener el valor del elemento en la celda

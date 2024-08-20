@@ -4,7 +4,7 @@ class Pila:
     def __init__(self, __cant=0):
         """
         Constructor de la clase Pila.
-        Inicializa la capacidad de la pila, el índice del __tope, y un arreglo de numpy para almacenar los elementos.
+        Inicializa la capacidad de la pila, el índice del tope, y un arreglo de numpy para almacenar los elementos.
         """
         self.__cant = __cant
         self.__tope = -1  # El __tope empieza en -1, lo que significa que la pila está vacía.
