@@ -40,7 +40,12 @@ class PilaSecuencial:
         if not self.vacia():  # Verifica si la pila no está vacía
             for i in range(self.__tope, -1, -1):  # Itera desde el tope hacia abajo
                 print(self.__items[i])  # Imprime cada elemento en la pila
-
+        return self.__items
+    
+    def tope(self):
+        if not self.vacia(): # Verifica si la pila
+            return self.__items[-1]
+        return None
 
 if __name__ == "__main__":
     cantidad = int(input("Ingrese la cantidad de elementos de la pila:\n"))
