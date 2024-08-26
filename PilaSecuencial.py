@@ -50,18 +50,36 @@ class PilaSecuencial:
 if __name__ == "__main__":
     cantidad = int(input("Ingrese la cantidad de elementos de la pila:\n"))
     pila = PilaSecuencial(cantidad)# Crea una pila con capacidad para 5 elemento
-    #MENU DE OPCIONES:
-    op = int(input("Ingrese opcion:\n 1_Carga Pila\n 2_ Muestra Pila\n 3_Suprime\n 4_Agrega Elemento a la pila\n 0_Para finalizar\n"))
-    while op!=0:
+    def mostrar_menu():
+        print("\n--- MENÚ DE OPCIONES ---")
+        print("1. Cargar Pila")
+        print("2. Mostrar Pila")
+        print("3. Suprimir")
+        print("4. Agregar Elemento a la Pila")
+        print("0. Finalizar")
+        print("------------------------")
+    op = -1
+    while op != 0:
+        mostrar_menu()
+        try:
+            op = int(input("Ingrese una opción: "))
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
+            continue
+
         if op == 1:
-            for i in range(cantidad):
-                numero = int(input("\n Ingrese numero:"))
-                pila.insertar(numero)  # Inserta el valor 10 en la pila
+            try:
+                numero = int(input("\nIngrese un número: "))
+                pila.insertar(numero)
+                print(f"Número {numero} agregado a la pila.\n")
+            except ValueError:
+                print("Por favor, ingrese un número válido.\n")
         elif op == 2:
-            pila.mostrar()  # Muestra los elementos de la pila
+            print("\n--- Mostrando Pila ---")
+            pila.mostrar()
         elif op == 3:
-            pila.suprimir()  # Suprime el elemento en el tope (20)
-        elif op == 4:
-            pass
-        else: print("Numero ingresado no corresponde\n")
-        op = int(input("Ingrese opcion:\n 1_Carga Pila\n 2_ Muestra Pila\n 3_Suprime\n 4_Agrega Elemento a la pila\n 0_Para finalizar\n"))
+            suprimido = pila.suprimir()
+            if suprimido != 0:
+                print(f"Elemento {suprimido} eliminado de la pila.\n")
+        else:
+            print("Opción no válida. Intente nuevamente.\n")
