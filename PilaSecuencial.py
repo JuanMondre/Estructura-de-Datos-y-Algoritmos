@@ -2,7 +2,7 @@ import numpy as np  # Importa el módulo numpy para manejar arrays de manera efi
 
 class PilaSecuencial:
     # Atributos privados de la clase
-    __items: np.array  # Array para almacenar los elementos de la pila
+    __elementos: np.array  # Array para almacenar los elementos de la pila
     __cant: int  # Capacidad máxima de la pila
     __tope: int  # Índice del tope de la pila
     
@@ -10,7 +10,7 @@ class PilaSecuencial:
         # Método constructor, se ejecuta al crear una instancia de la clase
         self.__cant = cant  # Inicializa la capacidad máxima de la pila
         self.__tope = -1  # Inicializa el tope en -1, indicando que la pila está vacía
-        self.__items = np.zeros(cant, dtype=int)  # Crea un array de ceros con capacidad 'cant' usando numpy
+        self.__elementos = np.zeros(cant, dtype=int)  # Crea un array de ceros con capacidad 'cant' usando numpy
     
     def vacia(self):
         # Método para verificar si la pila está vacía
@@ -20,7 +20,7 @@ class PilaSecuencial:
         # Método para insertar un elemento en la pila
         if self.__tope < self.__cant - 1:  # Verifica si hay espacio en la pila (si el tope es menor que el máximo índice)
             self.__tope += 1  # Incrementa el tope para señalar el nuevo elemento
-            self.__items[self.__tope] = x  # Almacena el elemento en la posición correspondiente del array
+            self.__elementos[self.__tope] = x  # Almacena el elemento en la posición correspondiente del array
             return x  # Retorna el valor insertado
         else:
             return 0  # Si la pila está llena, retorna 0 indicando que no se pudo insertar
@@ -31,7 +31,7 @@ class PilaSecuencial:
             print("Pila vacía")  # Si está vacía, imprime un mensaje de error
             return 0  # Retorna 0 para indicar que no hay elementos para suprimir
         else:
-            x = self.__items[self.__tope]  # Almacena el valor del elemento en el tope
+            x = self.__elementos[self.__tope]  # Almacena el valor del elemento en el tope
             self.__tope -= 1  # Decrementa el tope, eliminando el último elemento
             return x  # Retorna el valor eliminado
     
@@ -39,12 +39,12 @@ class PilaSecuencial:
         # Método para mostrar todos los elementos en la pila
         if not self.vacia():  # Verifica si la pila no está vacía
             for i in range(self.__tope, -1, -1):  # Itera desde el tope hacia abajo
-                print(self.__items[i])  # Imprime cada elemento en la pila
-        return self.__items
+                print(self.__elementos[i])  # Imprime cada elemento en la pila
+        return self.__elementos
     
     def tope(self):
         if not self.vacia(): # Verifica si la pila
-            return self.__items[-1]
+            return self.__elementos[-1]
         return None
 
 if __name__ == "__main__":

@@ -5,11 +5,11 @@ class ColaSecuencial:
     __pr:int
     __ul: int
     __cant:int
-    __items: int
+    __elementos: int
     def __init__(self, max_size=0):
         # Inicializa la cola con los atributos privados
         self.__max_size = max_size  # Capacidad máxima de la cola
-        self.__items = np.zeros(max_size, dtype=int)  # Arreglo que almacena los elementos de la cola
+        self.__elementos = np.zeros(max_size, dtype=int)  # Arreglo que almacena los elementos de la cola
         self.__pr = 0  # Puntero al primer elemento de la cola (frente de la cola)
         self.__ul = 0  # Puntero al último elemento de la cola
         self.__cant = 0  # Cantidad actual de elementos en la cola
@@ -21,7 +21,7 @@ class ColaSecuencial:
     def insertar(self, x):
         # Inserta un nuevo elemento en la cola
         if self.__cant < self.__max_size:
-            self.__items[self.__ul] = x  # Coloca el nuevo elemento en la posición indicada por ul
+            self.__elementos[self.__ul] = x  # Coloca el nuevo elemento en la posición indicada por ul
             self.__ul += 1  # Incrementa ul para que apunte al siguiente espacio vacío
             self.__cant += 1  # Incrementa la cantidad de elementos en la cola
             return x  # Devuelve el elemento insertado
@@ -34,7 +34,7 @@ class ColaSecuencial:
             print("Cola vacía")
             return 0  # Retorna 0 si la cola está vacía
         else:
-            x = self.__items[self.__pr]  # Toma el elemento al frente de la cola
+            x = self.__elementos[self.__pr]  # Toma el elemento al frente de la cola
             self.__pr += 1  # Incrementa pr para que apunte al siguiente elemento
             self.__cant -= 1  # Decrementa la cantidad de elementos en la cola
             return x  # Devuelve el elemento eliminado
@@ -43,7 +43,7 @@ class ColaSecuencial:
         # Recorre y muestra los elementos de la cola
         if not self.vacia():
             for i in range(self.__pr, self.__pr + self.__cant):
-                print(self.__items[i])
+                print(self.__elementos[i])
 
 def mostrar_menu():
     print("\n--- MENÚ DE OPCIONES ---")
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     Inicialización (__init__):
 
     Se inicializan los atributos privados de la clase. __max_size es la capacidad máxima de la cola.
-    __items es un arreglo de NumPy que almacena los elementos en la cola.
+    __elementos es un arreglo de NumPy que almacena los elementos en la cola.
     __pr y __ul son punteros que mantienen el índice del primer y último elemento respectivamente.
     __cant lleva la cuenta del número de elementos en la cola.
     Método vacia:

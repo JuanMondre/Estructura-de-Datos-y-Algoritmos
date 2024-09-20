@@ -1,13 +1,13 @@
 class Nodo:
-    def __init__(self, valor):
-        self.__valor = valor  # Valor del nodo
+    def __init__(self, elem):
+        self.__elem = elem  # elem del nodo
         self.__siguiente = None  # Referencia al siguiente nodo
 
-    def obtener_valor(self):
-        return self.__valor
+    def obtener_elem(self):
+        return self.__elem
 
-    def establecer_valor(self, valor):
-        self.__valor = valor
+    def establecer_elem(self, elem):
+        self.__elem = elem
 
     def obtener_siguiente(self):
         return self.__siguiente
@@ -17,30 +17,33 @@ class Nodo:
 
 
 class ListaEncadenada:
-    def __init__(self):
-        self.__primero = None  # Primer nodo de la lista
-        self.__tamaño = 0  # Número de elementos en la lista
+    __cabeza : Nodo
+    __tamaño : int
+    
+    def __init__(self, cabeza=None, tamaño= 0):
+        self.__cabeza = cabeza  # Primer nodo de la lista
+        self.__tamaño = tamaño  # Número de elementos en la lista
 
     def vacia(self):
         """Verifica si la lista está vacía."""
-        return self.__primero is None
+        return self.__cabeza is None
 
     def tamaño(self):
         """Devuelve el tamaño de la lista."""
         return self.__tamaño
 
-    def insertar(self, valor, posicion):
-        """Inserta un valor en una posición específica."""
+    def insertar(self, elem, posicion):
+        """Inserta un elem en una posición específica."""
         if posicion < 0 or posicion > self.__tamaño:
             raise IndexError("Posición fuera de rango")
 
-        nuevo_nodo = Nodo(valor)
+        nuevo_nodo = Nodo(elem)
 
         if posicion == 0:
-            nuevo_nodo.establecer_siguiente(self.__primero)
-            self.__primero = nuevo_nodo
+            nuevo_nodo.establecer_siguiente(self.__cabeza)
+            self.__cabeza = nuevo_nodo
         else:
-            nodo_actual = self.__primero
+            nodo_actual = self.__cabeza
             for _ in range(posicion - 1):
                 nodo_actual = nodo_actual.obtener_siguiente()
 
@@ -50,101 +53,101 @@ class ListaEncadenada:
         self.__tamaño += 1
 
     def suprimir(self, posicion):
-        """Suprime el nodo en la posición indicada y devuelve su valor."""
+        """Suprime el nodo en la posición indicada y devuelve su elem."""
         if posicion < 0 or posicion >= self.__tamaño:
             raise IndexError("Posición fuera de rango")
         
         if posicion == 0:
-            valor = self.__primero.obtener_valor()
-            self.__primero = self.__primero.obtener_siguiente()
+            elem = self.__cabeza.obtener_elem()
+            self.__cabeza = self.__cabeza.obtener_siguiente()
         else:
-            nodo_actual = self.__primero
+            nodo_actual = self.__cabeza
             for _ in range(posicion - 1):
                 nodo_actual = nodo_actual.obtener_siguiente()
 
             nodo_a_suprimir = nodo_actual.obtener_siguiente()
-            valor = nodo_a_suprimir.obtener_valor()
+            elem = nodo_a_suprimir.obtener_elem()
             nodo_actual.establecer_siguiente(nodo_a_suprimir.obtener_siguiente())
 
         self.__tamaño -= 1
-        return valor
+        return elem
 
-    def buscar(self, valor):
-        """Busca un valor en la lista y devuelve la posición donde se encuentra, o -1 si no se encuentra."""
-        nodo_actual = self.__primero
+    def buscar(self, elem):
+        """Busca un elem en la lista y devuelve la posición donde se encuentra, o -1 si no se encuentra."""
+        nodo_actual = self.__cabeza
         posicion = 0
         while nodo_actual is not None:
-            if nodo_actual.obtener_valor() == valor:
+            if nodo_actual.obtener_elem() == elem:
                 return posicion
             nodo_actual = nodo_actual.obtener_siguiente()
             posicion += 1
         return -1
 
     def recuperar(self, posicion):
-        """Devuelve el valor en la posición indicada."""
+        """Devuelve el elem en la posición indicada."""
         if posicion < 0 or posicion >= self.__tamaño:
             raise IndexError("Posición fuera de rango")
         
-        nodo_actual = self.__primero
+        nodo_actual = self.__cabeza
         for _ in range(posicion):
             nodo_actual = nodo_actual.obtener_siguiente()
         
-        return nodo_actual.obtener_valor()
+        return nodo_actual.obtener_elem()
 
     def primer_elemento(self):
-        """Devuelve el valor del primer nodo."""
+        """Devuelve el elem del primer nodo."""
         if self.vacia():
             return None
-        return self.__primero.obtener_valor()
+        return self.__cabeza.obtener_elem()
 
     def ultimo_elemento(self):
-        """Devuelve el valor del último nodo."""
+        """Devuelve el elem del último nodo."""
         if self.vacia():
             return None
 
-        nodo_actual = self.__primero
+        nodo_actual = self.__cabeza
         while nodo_actual.obtener_siguiente() is not None:
             nodo_actual = nodo_actual.obtener_siguiente()
         
-        return nodo_actual.obtener_valor()
+        return nodo_actual.obtener_elem()
 
     def siguiente(self, posicion):
-        """Devuelve el valor del nodo siguiente a la posición indicada."""
+        """Devuelve el elem del nodo siguiente a la posición indicada."""
         if posicion < 0 or posicion >= self.__tamaño - 1:
             raise IndexError("No hay un nodo siguiente a esta posición")
         
-        nodo_actual = self.__primero
+        nodo_actual = self.__cabeza
         for _ in range(posicion):
             nodo_actual = nodo_actual.obtener_siguiente()
         
-        return nodo_actual.obtener_siguiente().obtener_valor()
+        return nodo_actual.obtener_siguiente().obtener_elem()
 
     def anterior(self, posicion):
-        """Devuelve el valor del nodo anterior a la posición indicada."""
+        """Devuelve el elem del nodo anterior a la posición indicada."""
         if posicion <= 0 or posicion >= self.__tamaño:
             raise IndexError("No hay un nodo anterior a esta posición")
 
-        nodo_actual = self.__primero
+        nodo_actual = self.__cabeza
         for _ in range(posicion - 1):
             nodo_actual = nodo_actual.obtener_siguiente()
         
-        return nodo_actual.obtener_valor()
+        return nodo_actual.obtener_elem()
 
     def recorrer(self):
-        """Recorre e imprime todos los valores de la lista."""
-        nodo_actual = self.__primero
+        """Recorre e imprime todos los elemes de la lista."""
+        nodo_actual = self.__cabeza
         while nodo_actual is not None:
-            print(nodo_actual.obtener_valor())
+            print(nodo_actual.obtener_elem())
             nodo_actual = nodo_actual.obtener_siguiente()
 
     def crear(self):
         """Inicializa la lista vacía."""
-        self.__primero = None
+        self.__cabeza = None
         self.__tamaño = 0
 
     def vaciar(self):
         """Vacía la lista eliminando todos los nodos."""
-        self.__primero = None
+        self.__cabeza = None
         self.__tamaño = 0
 
 def mostrar_menu():
@@ -170,10 +173,10 @@ if __name__ == "__main__":
 
         if opcion == "1":
             try:
-                valor = int(input("Ingrese el valor a insertar: "))
-                posicion = int(input("Ingrese la posición donde insertar el valor: "))
-                lista.insertar(valor, posicion)
-                print(f"Elemento {valor} insertado en la posición {posicion}")
+                elem = int(input("Ingrese el elem a insertar: "))
+                posicion = int(input("Ingrese la posición donde insertar el elem: "))
+                lista.insertar(elem, posicion)
+                print(f"Elemento {elem} insertado en la posición {posicion}")
             except Exception as e:
                 print(f"Error: {e}")
 
@@ -184,38 +187,38 @@ if __name__ == "__main__":
         elif opcion == "3":
             try:
                 posicion = int(input("Ingrese la posición del elemento a suprimir: "))
-                valor = lista.suprimir(posicion)
-                print(f"Elemento {valor} en la posición {posicion} ha sido eliminado")
+                elem = lista.suprimir(posicion)
+                print(f"Elemento {elem} en la posición {posicion} ha sido eliminado")
             except Exception as e:
                 print(f"Error: {e}")
 
         elif opcion == "4":
             try:
                 posicion = int(input("Ingrese la posición del elemento a recuperar: "))
-                valor = lista.recuperar(posicion)
-                print(f"Elemento en la posición {posicion}: {valor}")
+                elem = lista.recuperar(posicion)
+                print(f"Elemento en la posición {posicion}: {elem}")
             except Exception as e:
                 print(f"Error: {e}")
 
         elif opcion == "5":
-            valor = int(input("Ingrese el valor a buscar: "))
-            posicion = lista.buscar(valor)
+            elem = int(input("Ingrese el elem a buscar: "))
+            posicion = lista.buscar(elem)
             if posicion != -1:
-                print(f"El valor {valor} se encuentra en la posición {posicion}")
+                print(f"El elem {elem} se encuentra en la posición {posicion}")
             else:
-                print("El valor no se encuentra en la lista")
+                print("El elem no se encuentra en la lista")
 
         elif opcion == "6":
-            valor = lista.ultimo_elemento()
-            if valor is not None:
-                print(f"Último elemento de la lista: {valor}")
+            elem = lista.ultimo_elemento()
+            if elem is not None:
+                print(f"Último elemento de la lista: {elem}")
             else:
                 print("La lista está vacía")
 
         elif opcion == "7":
-            valor = lista.primer_elemento()
-            if valor is not None:
-                print(f"Primer elemento de la lista: {valor}")
+            elem = lista.primer_elemento()
+            if elem is not None:
+                print(f"Primer elemento de la lista: {elem}")
             else:
                 print("La lista está vacía")
 

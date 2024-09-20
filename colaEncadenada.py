@@ -1,19 +1,19 @@
-class Celda:
-    def __init__(self, item=None, sig=None):
-        self.__item = item  # Dato almacenado en la celda
-        self.__sig = sig  # Puntero a la siguiente celda
+class Nodo:
+    def __init__(self, elemento=None, sig=None):
+        self.__elemento = elemento  # Dato almacenado en la nodo
+        self.__sig = sig  # Puntero a la siguiente nodo
 
-    def obtener_item(self):
-        return self.__item  # Devuelve el valor del dato almacenado en la celda
+    def obtener_elemento(self):
+        return self.__elemento  # Devuelve el valor del dato almacenado en la nodo
 
-    def cargar_item(self, xitem):
-        self.__item = xitem  # Asigna un valor al dato almacenado en la celda
+    def cargar_elemento(self, xelemento):
+        self.__elemento = xelemento  # Asigna un valor al dato almacenado en la nodo
 
     def cargar_sig(self, xtope):
-        self.__sig = xtope  # Asigna el puntero a la siguiente celda
+        self.__sig = xtope  # Asigna el puntero a la siguiente nodo
 
     def obtener_sig(self):
-        return self.__sig  # Devuelve el puntero a la siguiente celda
+        return self.__sig  # Devuelve el puntero a la siguiente nodo
 
 class Cola:
     def __init__(self, pr=None, ul=None, cant=0):
@@ -25,33 +25,33 @@ class Cola:
         return self.__cant == 0  # Verifica si la cola está vacía
 
     def insertar(self, x):
-        # Crea una nueva celda y asigna el valor x a su item
-        ps1 = Celda(x)
-        ps1.cargar_sig(None)  # La nueva celda no tiene una celda siguiente
+        # Crea una nueva nodo y asigna el valor x a su elemento
+        nuevoNodo = Nodo(x)
+        nuevoNodo.cargar_sig(None)  # La nueva nodo no tiene una nodo siguiente
 
         if self.__ul is None:  # Si la cola está vacía
-            self.__pr = ps1  # La primera celda es también la última
+            self.__pr = nuevoNodo  # La primera nodo es también la última
         else:
-            self.__ul.cargar_sig(ps1)  # Conecta la nueva celda al final de la cola
+            self.__ul.cargar_sig(nuevoNodo)  # Conecta la nueva nodo al final de la cola
 
-        self.__ul = ps1  # Actualiza el puntero al último elemento de la cola
+        self.__ul = nuevoNodo  # Actualiza el puntero al último elemento de la cola
         self.__cant += 1  # Incrementa la cantidad de elementos en la cola
-        return self.__ul.obtener_item()  # Devuelve el valor insertado
+        return self.__ul.obtener_elemento()  # Devuelve el valor insertado
 
     def suprimir(self):
         if self.vacia():
             print("Cola vacía")
             return 0  # Retorna 0 si la cola está vacía
         else:
-            aux = self.__pr  # Guarda la referencia a la celda a eliminar
-            x = self.__pr.obtener_item()  # Obtiene el valor del primer elemento de la cola
+            aux = self.__pr  # Guarda la referencia a la nodo a eliminar
+            x = self.__pr.obtener_elemento()  # Obtiene el valor del primer elemento de la cola
             self.__pr = self.__pr.obtener_sig()  # Actualiza el puntero al siguiente elemento
             self.__cant -= 1  # Decrementa la cantidad de elementos en la cola
 
             if self.__pr is None:  # Si la cola quedó vacía
                 self.__ul = None  # Se actualiza ul a None
 
-            del aux  # Libera la memoria ocupada por la celda eliminada
+            del aux  # Libera la memoria ocupada por la nodo eliminada
             return x  # Devuelve el valor del elemento eliminado
 
     def recuperar_pr(self):
@@ -60,7 +60,7 @@ class Cola:
     def recorrer(self):
         aux = self.__pr  # Comienza desde el primer elemento
         while aux is not None:  # Mientras haya elementos en la cola
-            print(aux.obtener_item())  # Muestra el valor del elemento actual
+            print(aux.obtener_elemento())  # Muestra el valor del elemento actual
             aux = aux.obtener_sig()  # Pasa al siguiente elemento
 # Ejemplo de uso
 
@@ -103,11 +103,11 @@ if __name__ == "__main__":
 
 """
 Explicación y Comentarios Detallados del Código
-Clase Celda:
+Clase nodo:
 
-__init__: Inicializa una celda con un item y un puntero sig al siguiente nodo.
-obtener_item: Devuelve el valor almacenado en la celda.
-cargar_item: Asigna un valor a la celda.
+__init__: Inicializa una nodo con un elemento y un puntero sig al siguiente nodo.
+obtener_elemento: Devuelve el valor almacenado en la nodo.
+cargar_elemento: Asigna un valor a la nodo.
 cargar_sig: Asigna el puntero al siguiente nodo.
 obtener_sig: Devuelve el puntero al siguiente nodo.
 Clase Cola:
@@ -115,9 +115,9 @@ Clase Cola:
 __init__: Inicializa la cola con punteros al primer y último nodo, y un contador de elementos.
 vacia: Devuelve True si la cola está vacía, de lo contrario, False.
 insertar: Inserta un nuevo valor en la cola:
-Crea una nueva celda con el valor x.
-Si la cola está vacía, la nueva celda se convierte en el primer elemento.
-Si no, conecta la nueva celda al final de la cola.
+Crea una nueva nodo con el valor x.
+Si la cola está vacía, la nueva nodo se convierte en el primer elemento.
+Si no, conecta la nueva nodo al final de la cola.
 suprimir: Elimina y devuelve el primer elemento de la cola:
 Si la cola está vacía, devuelve 0.
 Si no, elimina el primer elemento y actualiza los punteros.

@@ -1,74 +1,89 @@
-import numpy as np
+import numpy as np  # Importa la librería numpy, que será usada para manejar arrays de forma eficiente
 
 class ListaSecuencial:
     
-    __capacidad = int
-    __elementos = list
-    __tamano = int
-    
-    
+    __capacidad = int  # La capacidad máxima de la lista
+    __elementos = list  # El array que contendrá los elementos de la lista
+    __tamano = int  # El número actual de elementos en la lista
+
     def __init__(self, capacidad):
-        self.__capacidad = capacidad
-        self.__elementos = np.empty(capacidad, dtype=int)
-        self.__tamano = 0  # número de elementos actuales
+        # Constructor que inicializa la capacidad y crea un array vacío de esa capacidad
+        self.__capacidad = capacidad  # Almacena la capacidad máxima de la lista
+        self.__elementos = np.empty(capacidad, dtype=int)  # Crea un array de tamaño fijo con capacidad definida
+        self.__tamano = 0  # Inicializa el tamaño actual de la lista en 0 (lista vacía)
 
     def insertar(self, elemento, posicion):
+        # Método para insertar un elemento en una posición específica
         if self.__tamano >= self.__capacidad:
-            raise Exception("Lista llena")
+            raise Exception("Lista llena")  # Si la lista está llena, lanza una excepción
         if posicion < 0 or posicion > self.__tamano:
-            raise IndexError("Posición fuera de rango")
+            raise IndexError("Posición fuera de rango")  # Si la posición no es válida, lanza una excepción
         for i in range(self.__tamano, posicion, -1):
+            # Desplaza los elementos hacia la derecha para hacer espacio en la posición
             self.__elementos[i] = self.__elementos[i-1]
-        self.__elementos[posicion] = elemento
-        self.__tamano += 1
+        self.__elementos[posicion] = elemento  # Inserta el nuevo elemento en la posición especificada
+        self.__tamano += 1  # Incrementa el tamaño de la lista
 
     def suprimir(self, posicion):
+        # Método para eliminar un elemento de una posición específica
         if posicion < 0 or posicion >= self.__tamano:
-            raise IndexError("Posición fuera de rango")
+            raise IndexError("Posición fuera de rango")  # Si la posición no es válida, lanza una excepción
         for i in range(posicion, self.__tamano - 1):
+            # Desplaza los elementos hacia la izquierda para llenar el hueco del elemento suprimido
             self.__elementos[i] = self.__elementos[i+1]
-        self.__tamano -= 1
+        self.__tamano -= 1  # Decrementa el tamaño de la lista
 
     def recuperar(self, posicion):
+        # Método para recuperar el valor de un elemento en una posición específica
         if posicion < 0 or posicion >= self.__tamano:
-            raise IndexError("Posición fuera de rango")
-        return self.__elementos[posicion]
+            raise IndexError("Posición fuera de rango")  # Si la posición no es válida, lanza una excepción
+        return self.__elementos[posicion]  # Devuelve el valor del elemento en la posición dada
 
     def buscar(self, elemento):
-        i=0 
-        while i<self.__tamano:
-            if self.__elementos[i]==elemento:
-                return i
+        # Método para buscar un elemento en la lista y devolver su índice
+        i = 0
+        while i < self.__tamano:
+            # Recorre la lista desde el principio hasta encontrar el elemento
+            if self.__elementos[i] == elemento:
+                return i  # Si encuentra el elemento, devuelve su índice
             else:
-                i+=1
-        return -1
+                i += 1  # Si no, continúa buscando
+        return -1  # Si el elemento no se encuentra, devuelve -1
+
     def primer_elemento(self):
+        # Método para obtener el primer elemento de la lista
         if self.__tamano == 0:
-            raise Exception("Lista vacía")
-        return self.__elementos[0]
+            raise Exception("Lista vacía")  # Si la lista está vacía, lanza una excepción
+        return self.__elementos[0]  # Devuelve el primer elemento
 
     def ultimo_elemento(self):
+        # Método para obtener el último elemento de la lista
         if self.__tamano == 0:
-            raise Exception("Lista vacía")
-        return self.__elementos[self.__tamano - 1]
+            raise Exception("Lista vacía")  # Si la lista está vacía, lanza una excepción
+        return self.__elementos[self.__tamano - 1]  # Devuelve el último elemento
 
     def siguiente(self, posicion):
+        # Método para obtener el elemento siguiente al de una posición dada
         if posicion < 0 or posicion >= self.__tamano - 1:
-            raise IndexError("No hay elemento siguiente")
-        return self.__elementos[posicion + 1]
+            raise IndexError("No hay elemento siguiente")  # Si no hay siguiente, lanza una excepción
+        return self.__elementos[posicion + 1]  # Devuelve el elemento siguiente
 
     def anterior(self, posicion):
+        # Método para obtener el elemento anterior al de una posición dada
         if posicion <= 0 or posicion >= self.__tamano:
-            raise IndexError("No hay elemento anterior")
-        return self.__elementos[posicion - 1]
+            raise IndexError("No hay elemento anterior")  # Si no hay anterior, lanza una excepción
+        return self.__elementos[posicion - 1]  # Devuelve el elemento anterior
 
     def recorrer(self):
-        for i in range(self.__tamano):
-            print(self.__elementos[i], end=" ")
-        print()
+        # Método para recorrer y mostrar todos los elementos de la lista
+        for i in range(self.__tamano):  # Recorre desde el primer elemento hasta el último
+            print(self.__elementos[i], end=" ")  # Imprime cada elemento con un espacio
+        print()  # Nueva línea al final
 
     def vaciar(self):
-        self.__tamano = 0
+        # Método para vaciar la lista
+        self.__tamano = 0  # Resetea el tamaño de la lista a 0, esencialmente "vacía" la lista
+
         
         
 if __name__ == "__main__":
