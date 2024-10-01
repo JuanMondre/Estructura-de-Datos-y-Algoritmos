@@ -287,6 +287,7 @@ class Lista_enc:
         self.__cantidad_elementos = 0 #.. y la cantidad en 0
     def vacia(self):
         return self.__cantidad_elementos == 0
+    
     def insertar(self,dato,pos):
         if 1 > pos > self.__cantidad_elementos+1: #si la posicion es 0 y es mayor a la cantidad de elementos+1 que hay tonce tamos mal, por ende si es menor a la cantidad de elementos +1 tamos joya
             print("Posicion invalida\n")

@@ -70,7 +70,7 @@ class ListaEnlazadaOrdenada:
             raise IndexError("Posición fuera de rango")
         
         actual = self.__cabeza
-        for i in range(pos):
+        for _ in range(pos):
             actual = actual.obtener_siguiente()
         
         return actual.obtener_valor()
