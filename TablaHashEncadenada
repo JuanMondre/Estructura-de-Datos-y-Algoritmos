@@ -17,16 +17,18 @@ class Nodo:
 	def setSig(self, sig):
 		self.__sig=sig
 
-class Tabla_hash():
-	__lista: np.ndarray
-	__tamaño: int
-	__colisiones: list
+class TablaHashEncadenada():
+    
+    #En lugar de almacenar un solo elemento en cada índice de la tabla, se utiliza una lista enlazada para almacenar múltiples elementos que comparten la misma dirección (índice de la tabla hash).
+	__lista: np.ndarray #Lista que lleva un registro del número de colisiones en cada posición de la tabla.
+	__tamaño: int #El tamaño de la tabla hash, determinado por la fórmula N/M, donde N:número aproximado de elementos a almacenar, M:factor de carga.
+	__colisiones: list #Almacena los nodos en cada posición de la tabla hash.
 
 	def __init__(self, N=100, M=5):
-		self.__tamaño = int(N/M)
-		self.__colisiones=np.zeros(self.__tamaño, dtype=int)
-		self.__lista = np.ndarray(self.__tamaño, dtype=object)
-
+		self.__tamaño = int(N/M) 
+		self.__colisiones=np.zeros(self.__tamaño, dtype=int) 
+		self.__lista = np.ndarray(self.__tamaño, dtype=object)  
+  
 	def plegado(self, clave):
 		clave_str = str(clave)
 		suma=0
@@ -75,7 +77,7 @@ class Tabla_hash():
 		return promedio
 
 if __name__ == '__main__':
-	tabla = Tabla_hash()
+	tabla = TablaHashEncadenada()
 	tabla.insertar('45635882')
 	tabla.insertar('45635883')
 
