@@ -1,0 +1,5 @@
+1) Insertar recursivo o iterativo?
+2) Métodos recursivos o iterativos?
+3) Se puede poner un return en un while?
+4) es necesario verificar siempre que el árbol no este vacio en los métodos al igual que el nodo no sea nulo?
+	por ejemplo en el método buscar y en el método mínimo máximo hijo

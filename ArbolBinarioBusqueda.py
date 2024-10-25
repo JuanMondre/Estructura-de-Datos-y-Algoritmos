@@ -76,7 +76,7 @@ class ArbolBinarioBusqueda:
         else:
             print("Erorr el Valor ya se encuentra en el arbol")
             
-    def insertar(self,valor):
+    def insertar(self, valor):
         """
         Creamos un nuevo nodo con el valor a insertar.
         Verificamos si el árbol está vacío (si la raíz es None). Si lo está, el nuevo nodo se convierte en la raíz y terminamos.
@@ -95,32 +95,34 @@ class ArbolBinarioBusqueda:
                 Verificamos si el hijo derecho es None.
                 Si lo es, insertamos el nuevo nodo como hijo derecho y terminamos.
                 Si no, movemos el nodo actual al hijo derecho y continuamos el bucle.
-                
-        def insertar(self,dato):
-            nuevoNodo = Nodo(valor)
-            if self.__raiz == None:
-                self.__raiz = nuevoNodo
-                return
-            nodo = self.__raiz
-            while True:
-                if valor < nodo.getValor():
-                    if nodo.getIzquierda() is None:
-                        nodo.setIzquierda(nuevoNodo)
-                        return
-                    nodo = nodo.getIzquierda()
-                else:
-                    if nodo.getDerecha() is None:
-                        nodo.setDerecha(nuevoNodo)
-                        return
-                    nodo = nodo.getDerecha()
-            
         """
-    
+        nuevoNodo = Nodo(valor)
+        if self.__raiz is None:
+            self.__raiz = nuevoNodo
+            return nuevoNodo 
+        nodo = self.__raiz                                                                  #Guardo la raiz en una variable llamada nodo
+        flag = True
+        while flag:
+            if valor < nodo.getValor():
+                if nodo.getIzquierda() is None:
+                    nodo.setIzquierda(nuevoNodo)
+                    flag = False
+                else:
+                    nodo = nodo.getIzquierda()
+            else:
+                if nodo.getDerecha() is None:
+                    nodo.setDerecha(nuevoNodo)
+                    flag = False
+                else:
+                    nodo = nodo.getDerecha() 
+                    
     def getMinimoIterativo(self, nodo):                                                      #Metodo que busca el valor minimo del ABB (nodo mas a la izquierda)
-        while nodo.getIzquierda() is not None:                                               #El metodo es sencillo, mientras haya nodo o hijo hizquierdo avanza hacia el
-            nodo = nodo.getIzquierda()                                                       #Cuando no puede avanzar mas ese nodo es el minimo 
-        return nodo                                                                          #Retornar el nodo en lugar del valor
-    
+        if  not self.vacio():
+            while nodo.getIzquierda() is not None:                                               #El metodo es sencillo, mientras haya nodo o hijo hizquierdo avanza hacia el
+                nodo = nodo.getIzquierda()                                                       #Cuando no puede avanzar mas ese nodo es el minimo 
+            return nodo                                                               #Retornar el nodo en lugar del valor
+        else: print("Arbol Vacio")   
+   
     def getMinimo(self,nodo):                                                                #Realiza lo mismo que el metodo anterior
         if self.__raiz is None:                                                              #Si la raiz no existe entonces retorna null
             return None                                                                            
@@ -223,7 +225,7 @@ class ArbolBinarioBusqueda:
         elif valor < nodo.getValor():                                                         #Si el valor es mas chico que la raiz
             return self.buscarRecursivo(nodo.getIzquierda(),valor)                            #Busco por la izquierda
         else:
-            return self.buscarRecursivo(nodo.getDerecha(),valor)                              #Si el valor es mas grandwe que la raiz busco por la derecha
+            return self.buscarRecursivo(nodo.getDerecha(),valor)                              #Si el valor es mas grande que la raiz busco por la derecha
         
        
     def nivel(self,nodo, valor, nivel=0):
@@ -233,12 +235,13 @@ class ArbolBinarioBusqueda:
             print("No se encuentra el elemento")
         elif nodo.getValor() == valor:
             print(F"Nivel de {valor} es: {nivel}")
-        elif nodo.getValor()> valor:
+        elif valor < nodo.getValor():
             self.nivel(nodo.getIzquierda(),valor,nivel+1)
         else:
             self.nivel(nodo.getDerecha(),valor,nivel+1)
     
     """
+    MISMA FUNCION PERO CON RETORNOS
     def nivel(self,nodo, valor, nivel=0):
         if self.vacio():
             print("El arbol esta vacio")
@@ -306,12 +309,13 @@ class ArbolBinarioBusqueda:
             
 if __name__ == "__main__":
     arbol = ArbolBinarioBusqueda()
-    """
+    
     valores_a_insertar = [15, 10, 20, 8, 12, 17, 25]
     print("Insertando valores en el árbol:", valores_a_insertar)
     for valor in valores_a_insertar:
         print(f"Insertando valor {valor}")
         arbol.insertar(valor)
+     
     """    
     arbol.insertarRecursivo(15,arbol.getRaiz())
     arbol.insertarRecursivo(10,arbol.getRaiz())
@@ -320,6 +324,7 @@ if __name__ == "__main__":
     arbol.insertarRecursivo(12,arbol.getRaiz())
     arbol.insertarRecursivo(17,arbol.getRaiz())
     arbol.insertarRecursivo(25,arbol.getRaiz())
+    """
 
     # Recorridos del árbol
     print("\nRecorrido Inorden (debe mostrar valores en orden ascendente):")
@@ -357,13 +362,13 @@ if __name__ == "__main__":
     
     print("\n")
     # Prueba del nivel de un nodo
-    arbol.nivel(arbol.getRaiz(),15,0)
-    arbol.nivel(arbol.getRaiz(),10,0)
-    arbol.nivel(arbol.getRaiz(),20,0)
-    arbol.nivel(arbol.getRaiz(),8,0)
-    arbol.nivel(arbol.getRaiz(),12,0)
-    arbol.nivel(arbol.getRaiz(),17,0)
-    arbol.nivel(arbol.getRaiz(),25,0)
+    arbol.nivel(arbol.getRaiz(),15,1)
+    arbol.nivel(arbol.getRaiz(),10,1)
+    arbol.nivel(arbol.getRaiz(),20,1)
+    arbol.nivel(arbol.getRaiz(),8,1)
+    arbol.nivel(arbol.getRaiz(),12,1)
+    arbol.nivel(arbol.getRaiz(),17,1)
+    arbol.nivel(arbol.getRaiz(),25,1)
     
     # Prueba de eliminar un valor 
     print("\nEliminando el valor 10 del árbol")
