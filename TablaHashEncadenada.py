@@ -4,8 +4,8 @@ class Nodo:
 	__sig: object
 	__clave: object
 
-	def __init__(self, clave):
-		self.__sig = None
+	def __init__(self, clave,sig=None):
+		self.__sig = sig
 		self.__clave = clave
 
 	def getSig(self):

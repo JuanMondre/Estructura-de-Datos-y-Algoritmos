@@ -227,6 +227,7 @@ class ArbolBinarioBusqueda:
         else:
             return self.buscarRecursivo(nodo.getDerecha(),valor)                              #Si el valor es mas grande que la raiz busco por la derecha
         
+
        
     def nivel(self,nodo, valor, nivel=0):
         if self.vacio():
@@ -338,6 +339,8 @@ if __name__ == "__main__":
     # Búsquedas
     #arbol.buscarIterativo(25)
     print(arbol.buscarRecursivo(arbol.getRaiz(),25))
+    print("\n")
+    print(arbol.buscar(arbol.getRaiz(),25))
     print("\n")
     
     # Prueba de obtener mínimo y máximo

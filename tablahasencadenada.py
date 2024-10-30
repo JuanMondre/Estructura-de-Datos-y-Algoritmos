@@ -20,7 +20,6 @@ class Nodo:
 
 
 class TablaHashEncadenada:
-    
     # En lugar de almacenar un solo elemento en cada índice de la tabla, se utiliza una lista enlazada para almacenar múltiples elementos que comparten la misma dirección (índice de la tabla hash).
     __lista: np.ndarray  # Lista que lleva un registro del número de colisiones en cada posición de la tabla.
     __tamaño: int        # El tamaño de la tabla hash, determinado por la fórmula N/M, donde N: número aproximado de elementos a almacenar, M: factor de carga.
